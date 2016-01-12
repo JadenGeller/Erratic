@@ -2,7 +2,7 @@
 
 Erratic defines a few types for working with randomized content. `LazyShuffleCollection` provides a shuffled view into a collection that whose order is lazily determined as indices are accessed. Because of this, it provides a fast way to access and mutate random elements of a collection without determining the shuffling of the entire collection. Note that the time complexity of index access has an average case O(n) when all indices in the array are accessed.
 ```swift
-let arr = LazyShuffleCollection([1, 2, 3, 4])
+let arr = [1, 2, 3, 4].lazy.shuffe()
 print(arr) // -> [2, 3, 1, 4]
 arr.shuffle()
 print(arr) // -> [3, 4, 1, 2]
