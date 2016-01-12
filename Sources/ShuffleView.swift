@@ -8,8 +8,6 @@
 
 import Darwin
 
-// Provides average case O(n) first access and worst case O(infinity) first access
-// Provides worst case O(1) repeat access
 public struct ShuffleView<Collection: CollectionType where Collection.Index.Distance == Int, Collection.Index: Hashable> {
     private var collection: Collection
     
@@ -51,6 +49,7 @@ extension ShuffleView: CollectionType {
         return collection.endIndex
     }
     
+    /// Average case O(n) and worst case O(infinity) first access; worst case O(1) repeat access.
     public subscript(index: Collection.Index) -> Collection.Generator.Element {
     	get {
     		return collection[permutation[index]]
@@ -112,6 +111,7 @@ extension MutableShuffleView: MutableCollectionType {
         return collection.endIndex
     }
     
+    /// Average case O(n) and worst case O(infinity) first access; worst case O(1) repeat access.
     public subscript(index: Collection.Index) -> Collection.Generator.Element {
         get {
             return collection[permutation[index]]
