@@ -8,6 +8,14 @@
 
 import Darwin
 
+extension LazyCollectionType where Index: Hashable, Index.Distance == Int {
+    /// Return a shuffled view of `self`.
+    @warn_unused_result
+    public func shuffle() -> LazyShuffleCollection<Self> {
+        return LazyShuffleCollection(self)
+    }
+}
+
 public struct LazyShuffleCollection<Collection: CollectionType where Collection.Index.Distance == Int, Collection.Index: Hashable> {
     private var collection: Collection
     
@@ -40,7 +48,7 @@ extension LazyShuffleCollection {
     }
 }
 
-extension LazyShuffleCollection: CollectionType {
+extension LazyShuffleCollection: LazyCollectionType {
     public var startIndex: Collection.Index {
         return collection.startIndex
     }
@@ -102,7 +110,7 @@ extension MutableLazyShuffleCollection {
     }
 }
 
-extension MutableLazyShuffleCollection: MutableCollectionType {
+extension MutableLazyShuffleCollection: MutableCollectionType, LazyCollectionType {
     public var startIndex: Collection.Index {
         return collection.startIndex
     }
