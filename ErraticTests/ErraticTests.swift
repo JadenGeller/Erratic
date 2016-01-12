@@ -28,8 +28,7 @@ class ErraticTests: XCTestCase {
     }
     
     func testShuffleViewCoversAllPossibilities() {
-        let collection = [1, 2, 3, 4]
-        var shuffleView = LazyShuffleCollection(collection)
+        var shuffleView = [1, 2, 3, 4].lazy.shuffle()
         var seen = Set<String>()
         
         while seen.count < 24 {
@@ -49,7 +48,7 @@ class ErraticTests: XCTestCase {
     }
     
     func testShuffleViewSaving() {
-        var shuffleView = LazyShuffleCollection([1, 2, 3, 4])
+        var shuffleView = [1, 2, 3, 4].lazy.shuffle()
         let saved = Array(shuffleView)
         let permutation = shuffleView.permutation
         shuffleView.shuffle()
@@ -58,7 +57,7 @@ class ErraticTests: XCTestCase {
     }
     
     func testShuffleViewPermutationCompleteness() {
-        let a = LazyShuffleCollection([1, 2, 3, 4, 5])
+        let a = [1, 2, 3, 4, 5].lazy.shuffle()
         let b = a
         XCTAssertEqual(Array(a), Array(b))
     }
