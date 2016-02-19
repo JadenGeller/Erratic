@@ -11,6 +11,8 @@
 		4D2A0B9D1C44885F00655298 /* ErraticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2A0B9C1C44885F00655298 /* ErraticTests.swift */; };
 		4D2A0BAA1C44887D00655298 /* UniqueRandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2A0BA91C44887D00655298 /* UniqueRandomGenerator.swift */; };
 		4D2A0BAC1C4488A400655298 /* RepeatingRandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2A0BAB1C4488A400655298 /* RepeatingRandomGenerator.swift */; };
+		4D71B5621C7768440077E26D /* LazyShuffleCollectionPermutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71B5611C7768440077E26D /* LazyShuffleCollectionPermutation.swift */; };
+		4D71B5641C77689F0077E26D /* MutableLazyShuffleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D71B5631C77689F0077E26D /* MutableLazyShuffleCollection.swift */; };
 		4D7213901C449A6C007B806B /* LazyShuffleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC0C7C81C4497AF002A1704 /* LazyShuffleCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		4D2A0B9E1C44885F00655298 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D2A0BA91C44887D00655298 /* UniqueRandomGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UniqueRandomGenerator.swift; path = Sources/UniqueRandomGenerator.swift; sourceTree = "<group>"; };
 		4D2A0BAB1C4488A400655298 /* RepeatingRandomGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepeatingRandomGenerator.swift; path = Sources/RepeatingRandomGenerator.swift; sourceTree = "<group>"; };
+		4D71B5611C7768440077E26D /* LazyShuffleCollectionPermutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyShuffleCollectionPermutation.swift; path = Sources/LazyShuffleCollectionPermutation.swift; sourceTree = "<group>"; };
+		4D71B5631C77689F0077E26D /* MutableLazyShuffleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MutableLazyShuffleCollection.swift; path = Sources/MutableLazyShuffleCollection.swift; sourceTree = "<group>"; };
 		4DC0C7C81C4497AF002A1704 /* LazyShuffleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LazyShuffleCollection.swift; path = Sources/LazyShuffleCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +64,8 @@
 				4D2A0BA91C44887D00655298 /* UniqueRandomGenerator.swift */,
 				4D2A0BAB1C4488A400655298 /* RepeatingRandomGenerator.swift */,
 				4DC0C7C81C4497AF002A1704 /* LazyShuffleCollection.swift */,
+				4D71B5631C77689F0077E26D /* MutableLazyShuffleCollection.swift */,
+				4D71B5611C7768440077E26D /* LazyShuffleCollectionPermutation.swift */,
 				4D2A0B8F1C44885F00655298 /* Erratic */,
 				4D2A0B9B1C44885F00655298 /* ErraticTests */,
 				4D2A0B8E1C44885F00655298 /* Products */,
@@ -201,6 +207,8 @@
 			files = (
 				4D2A0BAC1C4488A400655298 /* RepeatingRandomGenerator.swift in Sources */,
 				4D7213901C449A6C007B806B /* LazyShuffleCollection.swift in Sources */,
+				4D71B5621C7768440077E26D /* LazyShuffleCollectionPermutation.swift in Sources */,
+				4D71B5641C77689F0077E26D /* MutableLazyShuffleCollection.swift in Sources */,
 				4D2A0BAA1C44887D00655298 /* UniqueRandomGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
