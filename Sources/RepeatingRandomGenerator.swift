@@ -6,7 +6,11 @@
 //  Copyright © 2016 Jaden Geller. All rights reserved.
 //
 
-import Darwin
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
 
 public struct RepeatingRandomGenerator<Source: CollectionType where Source.Index.Distance == Int>: SequenceType, GeneratorType {
     private let source: Source
@@ -17,7 +21,11 @@ public struct RepeatingRandomGenerator<Source: CollectionType where Source.Index
     }
     
     public func next() -> Source.Generator.Element? {
-        let distance = Int(arc4random_uniform(UInt32(source.count)))
+        #if os(Linux)
+            let distance = Int(random() % source.count)
+        #else
+            let distance = Int(arc4random_uniform(UInt32(source.count)))
+        #endif
         return source[source.startIndex.advancedBy(distance)]
     }
 }

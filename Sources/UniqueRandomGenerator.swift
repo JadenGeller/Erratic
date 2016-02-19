@@ -23,7 +23,11 @@ public struct UniqueRandomGenerator<Source: CollectionType where Source.Index.Di
         
         var index: Source.Index
         repeat {
-            let distance = Int(arc4random_uniform(UInt32(source.count)))
+            #if os(Linux)
+                let distance = Int(random() % source.count)
+            #else
+                let distance = Int(arc4random_uniform(UInt32(source.count)))
+            #endif
             index = source.startIndex.advancedBy(distance)
         } while usedIndices.contains(index)
         
