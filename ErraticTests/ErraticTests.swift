@@ -73,7 +73,7 @@ class ErraticTests: XCTestCase {
     func testShuffleViewRangeReplacementShorter() {
         let collection = [5, 10, 15, 20]
         var shuffleView = RangeReplaceableLazyShuffleCollection(unshuffled: collection)
-        shuffleView.permutation = ShufflePermutation(AnyPermutation(SequencedPermuation(indices: [3, 1, 0, 2])))
+        shuffleView.permutation = LazyShufflePermutation(AnyPermutation(SequencedPermuation(indices: [3, 1, 0, 2])))
         XCTAssertEqual([20, 10, 5, 15], Array(shuffleView))
         shuffleView.replaceRange(1...3, with: [0, 1])
         XCTAssertEqual([1, 0, 20], shuffleView.base)
@@ -83,7 +83,7 @@ class ErraticTests: XCTestCase {
     func testShuffleViewRangeReplacementLonger() {
         let collection = [5, 10, 15, 20]
         var shuffleView = RangeReplaceableLazyShuffleCollection(unshuffled: collection)
-        shuffleView.permutation = ShufflePermutation(AnyPermutation(SequencedPermuation(indices: [3, 1, 0, 2])))
+        shuffleView.permutation = LazyShufflePermutation(AnyPermutation(SequencedPermuation(indices: [3, 1, 0, 2])))
         XCTAssertEqual([20, 10, 5, 15], Array(shuffleView))
         shuffleView.replaceRange(1...2, with: [0, 1, 2, 3])
         XCTAssertEqual([1, 0, 15, 20, 2, 3], shuffleView.base)

@@ -1,5 +1,5 @@
 //
-//  ShufflePermutation.swift
+//  LazyShufflePermutation.swift
 //  Erratic
 //
 //  Created by Jaden Geller on 2/19/16.
@@ -8,7 +8,7 @@
 
 import Permute
 
-public struct ShufflePermutation<Index: ForwardIndexType where Index.Distance == Int, Index: Hashable>: PermutationType {
+public struct LazyShufflePermutation<Index: ForwardIndexType where Index.Distance == Int, Index: Hashable>: PermutationType {
     private var transform: Index -> Index
     
     internal init(transform: Index -> Index) {
@@ -19,8 +19,8 @@ public struct ShufflePermutation<Index: ForwardIndexType where Index.Distance ==
         self.init { permutation[$0] }
     }
     
-    public static var unshuffled: ShufflePermutation {
-        return ShufflePermutation { $0 }
+    public static var unshuffled: LazyShufflePermutation {
+        return LazyShufflePermutation { $0 }
     }
     
     public init<C: CollectionType where C.Generator.Element == Index, C.Index.Distance == Int, C.Index: Hashable>(indices: C) {

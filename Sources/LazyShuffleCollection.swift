@@ -27,9 +27,9 @@ public struct LazyShuffleCollection<Base: CollectionType where Base.Index.Distan
             permuted.base = newValue
         }
     }
-    public var permutation: ShufflePermutation<Base.Index> {
+    public var permutation: LazyShufflePermutation<Base.Index> {
         get {
-            return ShufflePermutation(permuted.permutation)
+            return LazyShufflePermutation(permuted.permutation)
         } set {
             permuted.permutation = AnyPermutation(newValue)
         }
@@ -44,7 +44,7 @@ public struct LazyShuffleCollection<Base: CollectionType where Base.Index.Distan
     /// Shuffles the view in O(1) time complexity, resetting all indexed access operations to first
     /// access time complexity.
     public mutating func shuffle() {
-        self.permutation = ShufflePermutation(indices: base.indices)
+        self.permutation = LazyShufflePermutation(indices: base.indices)
     }
 }
 
