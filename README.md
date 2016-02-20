@@ -24,4 +24,13 @@ bar.shuffle()
 bar.permutation = .unshuffled
 ```
 
+Shuffled collections can be mutated in a way that modifies the `base` as well using `MutableLazyShuffleCollection` or `RangeReplaceableLazyShuffleCollection`.
+```swift
+var bazz = MutableLazyShuffleCollection(unshuffled: [1, 2, 3, 4])
+bazz.shuffle()
+bazz[0] = 100
+// print(bazz.base)
+// -> [100, 2, 3, 4] OR [1, 100, 3, 4] OR [1, 2, 100, 4] OR [1, 2, 3, 100]
+```
+
 Erratic was built on top of [Permute](https://github.com/JadenGeller/Permute), a Swift module for permuted collection types.
