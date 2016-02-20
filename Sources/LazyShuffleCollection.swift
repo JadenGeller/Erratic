@@ -6,61 +6,61 @@
 //  Copyright © 2016 Jaden Geller. All rights reserved.
 //
 
-import Darwin
+import Permute
 
 extension LazyCollectionType where Index: Hashable, Index.Distance == Int {
     /// Return a shuffled view of `self`.
     @warn_unused_result
     public func shuffle() -> LazyShuffleCollection<Self> {
-        return LazyShuffleCollection(self)
+        var collection = LazyShuffleCollection(unshuffled: self)
+        collection.shuffle()
+        return collection
     }
 }
 
-public struct LazyShuffleCollection<Collection: CollectionType where Collection.Index.Distance == Int, Collection.Index: Hashable> {
-    private var collection: Collection
-    
-    /// The current shuffling for the collection. This value is only valid for this particular `LazyShuffleCollection`.
-    public var permutation: LazyShuffleCollectionPermutation<Collection>
-    
-    public init(_ collection: Collection, mapping: LazyShuffleCollectionPermutation<Collection>) {
-        precondition(collection.count <= Int(UInt32.max), "Collection is too large.")
-        self.collection = collection
-        self.permutation = mapping
+public struct LazyShuffleCollection<Base: CollectionType where Base.Index.Distance == Int, Base.Index: Hashable> {
+    internal var permuted: PermuteCollection<Base>
+    public var base: Base {
+        get {
+            return permuted.base
+        } set {
+            permuted.base = newValue
+        }
     }
-}
-
-extension LazyShuffleCollection {
+    public var permutation: AnyPermutation<Base.Index> {
+        get {
+            return permuted.permutation
+        } set {
+            permuted.permutation = newValue
+        }
+    }
+    
     /// Constructs an unshuffled view of `collection`.
-    public init(unshuffled collection: Collection) {
-        self.init(collection, mapping: LazyShuffleCollectionPermutation(unshuffled: collection))
+    public init(unshuffled collection: Base) {
+        precondition(collection.count <= Int(UInt32.max), "Collection is too large.")
+        self.permuted = PermuteCollection(collection, withPermutation: IdentityPermutation())
     }
     
-    /// Constructs a randomly shuffled view of `collection`.
-    public init(_ collection: Collection) {
-        self.collection = collection
-        self.permutation = LazyShuffleCollectionPermutation(collection)
-    }
-    
-    /// Reshuffles the view in O(1) time complexity, resetting all indexed access operations to first
+    /// Shuffles the view in O(1) time complexity, resetting all indexed access operations to first
     /// access time complexity.
     public mutating func shuffle() {
-        self.permutation = LazyShuffleCollectionPermutation(collection)
+        self.permutation = AnyPermutation(ShufflePermutation(indices: base.indices))
     }
 }
 
-extension LazyShuffleCollection: LazyCollectionType {
-    public var startIndex: Collection.Index {
-        return collection.startIndex
+extension LazyShuffleCollection: LazyCollectionType, PermuteCollectionType {
+    public var startIndex: Base.Index {
+        return base.startIndex
     }
     
-    public var endIndex: Collection.Index {
-        return collection.endIndex
+    public var endIndex: Base.Index {
+        return base.endIndex
     }
     
     /// Average case O(n) and worst case O(infinity) first access; worst case O(1) repeat access.
-    public subscript(index: Collection.Index) -> Collection.Generator.Element {
+    public subscript(index: Base.Index) -> Base.Generator.Element {
     	get {
-    		return collection[permutation[index]]
+    		return permuted[index]
     	}
     }
 }
