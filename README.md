@@ -18,3 +18,5 @@ bleh[0] = 100
 bleh.permutation = unshuffledPermutation
 print(bleh) // -> [1, 4, 100, 3]
 ```
+
+Erratic was built on top of [Permute](https://github.com/JadenGeller/Permute), a Swift module for permuted collection types.
