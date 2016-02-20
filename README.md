@@ -9,14 +9,19 @@ print(arr) // -> [3, 4, 1, 2]
 ```
 Note that index access has average case time complexity `O(n)` on first access and worst case time complexity `O(1)` on subsequent access, where `n` is the number of indices already determined. It follows that if `n < N` indices of the collection are access for some constant `N`, we observe average case `O(1)` time complexity on first access.
 
-`LazyShuffleCollection` collection exposes a property `permutation` that represents the current shuffling. Thus, this shuffling can be saved and later restored if desired.
+`LazyShuffleCollection` collection exposes a property `permutation` that represents the current shuffling. Thus, this shuffling can be saved and later restored if desired. `LazyShuffleCollection` also exposes a `base` property to access the unshuffled backing of the collection.
 ```swift
-var bleh = MutableLazyShuffleCollection(unshuffled: [1, 2, 3, 4])
-let unshuffledPermutation = bleh.permutation
-bleh.shuffle()
-bleh[0] = 100
-bleh.permutation = unshuffledPermutation
-print(bleh) // -> [1, 4, 100, 3]
+var foo = [1, 2, 3, 4].lazy.shuffle()
+let shuffling = foo.permutation // save for later
+foo.shuffle()                   // shuffle
+foo.permutation = shuffling     // restore
+```
+
+We can also easily unshuffle our collection, or create unshuffled instances of `LazyShuffleCollection`.
+```swift
+var bar = LazyShuffleCollection(unshuffled: [1, 2, 3, 4])
+bar.shuffle()
+bar.permutation = .unshuffled
 ```
 
 Erratic was built on top of [Permute](https://github.com/JadenGeller/Permute), a Swift module for permuted collection types.
