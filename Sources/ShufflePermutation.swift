@@ -15,7 +15,11 @@ public struct ShufflePermutation<Index: ForwardIndexType where Index.Distance ==
         self.transform = transform
     }
     
-    public static func unshuffled() -> ShufflePermutation {
+    internal init(_ permutation: AnyPermutation<Index>) {
+        self.init { permutation[$0] }
+    }
+    
+    public static var unshuffled: ShufflePermutation {
         return ShufflePermutation { $0 }
     }
     
