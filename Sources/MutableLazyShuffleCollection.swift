@@ -33,7 +33,7 @@ public struct MutableLazyShuffleCollection<Base: MutableCollectionType where Bas
     
     /// Shuffles the view in O(1) time complexity, resetting all indexed access operations to first
     /// access time complexity.
-    public mutating func shuffle() {
+    public mutating func shuffleInPlace() {
         self.permutation = LazyShufflePermutation(indices: base.indices)
     }
 }
