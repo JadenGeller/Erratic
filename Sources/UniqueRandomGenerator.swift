@@ -6,7 +6,11 @@
 //  Copyright © 2016 Jaden Geller. All rights reserved.
 //
 
-import Darwin
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin.C
+#endif
 
 public struct UniqueRandomGenerator<Source: CollectionType where Source.Index.Distance == Int, Source.Index: Hashable>: SequenceType, GeneratorType {
     private let source: Source
