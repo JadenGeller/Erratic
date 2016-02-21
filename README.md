@@ -33,4 +33,12 @@ bazz[0] = 100
 // -> [100, 2, 3, 4] OR [1, 100, 3, 4] OR [1, 2, 100, 4] OR [1, 2, 3, 100]
 ```
 
-Erratic was built on top of [Permute](https://github.com/JadenGeller/Permute), a Swift module for permuted collection types.
+## Time Complexity
+
+We will examine how Erratic accomplishes lazy shuffling to determine the time complexity of the process. Erratic is built on top of [Permute](https://github.com/JadenGeller/Permute), a Swift module for permuted collection types. Effectively, Erratic simply generates a `LazyShufflePermutation` that lazily maps unshuffled indices to shuffled indices. Let's look at how this is accomplished!
+
+`LazyShufflePermutation` utilizes a `UniqueRandomGenerator` that will generate random members of a collection but never repeating a given member. This is accomplished by keeping a set of indices whose element we've already generated. When we generate a new random index, we check if it is in the set. If so, we generate a new element; if not, we add it and then return the element. Obviously this implies that the 0th unique access will be in consant time, and each subsequent access will take longer and longer. Also notice that, the larger the array, the more quickly we'll be able to make subsequent unique accesses since it'll less likely be an already chosen element. Once we've already determined the element at a given index, we will be able to reaccess it in constant time.
+
+Denoting `n` to be the number of elements in the array and denoting `x` to be the number of unique index accesses made so far, we should expect another unique access to take `O(x/(n - x))` time. This result can be obtained by treating each access attempt as a Bernoulli trial.
+
+Note that shuffling has `O(1)` time complexity since the shuffle is completed lazily.
