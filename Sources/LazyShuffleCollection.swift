@@ -13,7 +13,7 @@ extension LazyCollectionType where Index: Hashable, Index.Distance == Int {
     @warn_unused_result
     public func shuffle() -> LazyShuffleCollection<Self> {
         var collection = LazyShuffleCollection(unshuffled: self)
-        collection.shuffle()
+        collection.shuffleInPlace()
         return collection
     }
 }
